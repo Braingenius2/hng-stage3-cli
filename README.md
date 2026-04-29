@@ -1,39 +1,35 @@
 # Insighta CLI
 
-Command-line tool for the Insighta Labs+ Profile Intelligence Platform.
+A powerful, high-performance command-line interface for the Insighta Labs+ platform, designed for rapid data analysis and profile management.
 
 ## Installation
-
 ```bash
+# Clone the repo and install globally
 npm install -g .
 ```
 
-## Usage
+## Security
+- **Auth Flow**: Uses OAuth 2.0 with **PKCE** (Proof Key for Code Exchange) for secure authentication in public clients.
+- **Credential Storage**: Tokens are stored securely in `~/.insighta/credentials.json`.
+- **Token Management**: Automatic background refresh for seamless long-running sessions.
 
-### Authentication
-```bash
-insighta login          # Authenticate via GitHub OAuth
-insighta logout         # Clear stored credentials
-insighta whoami         # Display current user info
-```
+## Command Reference
 
-### Profiles
-```bash
-insighta profiles list                              # List all profiles
-insighta profiles list --gender male                # Filter by gender
-insighta profiles list --country NG --age-group adult
-insighta profiles list --min-age 25 --max-age 40
-insighta profiles list --sort-by age --order desc
-insighta profiles list --page 2 --limit 20
+### 🔐 Authentication
+- `insighta login` — Interactive OAuth login flow via browser.
+- `insighta whoami` — Display current user ID and role.
+- `insighta logout` — Revoke session and clear local tokens.
 
-insighta profiles get <id>                          # Get single profile
-insighta profiles search "young males from nigeria" # Natural language search
-insighta profiles create --name "Harriet Tubman"    # Create profile (admin only)
+### 👥 Profile Management
+- `insighta profiles list` — Browse profiles with pagination.
+  - `--gender`, `--country`, `--age-group` (Filters)
+  - `--sort-by`, `--order` (Sorting)
+  - `--page`, `--limit` (Pagination)
+- `insighta profiles get <id>` — View full details of a specific profile.
+- `insighta profiles search "..."` — Natural language query parsing.
+- `insighta profiles create` — Create a new entry (**Admin only**).
+- `insighta profiles export` — Download entire dataset in CSV format.
 
-insighta profiles export --format csv               # Export all profiles
-insighta profiles export --format csv --gender male --country NG
-```
-
-## Credentials
-
-Credentials are stored at `~/.insighta/credentials.json`.
+## Environment Config
+- `INSIGHTA_API_URL`: Override the default API endpoint.
+- `GITHUB_CLIENT_ID`: Override the default OAuth client.
