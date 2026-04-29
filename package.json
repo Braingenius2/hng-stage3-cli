@@ -1,17 +1,30 @@
 {
-  "name": "cli",
+  "name": "insighta-cli",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "CLI tool for Insighta Labs+ profile intelligence platform",
+  "main": "dist/index.js",
+  "bin": {
+    "insighta": "dist/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "scripts": {
+    "build": "npx esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=cjs --banner:js=\"#!/usr/bin/env node\"",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "keywords": ["insighta", "cli", "profiles"],
+  "author": "Braingenius2",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "esbuild": "^0.25.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "commander": "^13.0.0",
+    "cli-table3": "^0.6.5",
+    "ora": "^5.4.1",
+    "chalk": "^4.1.2",
+    "open": "^8.4.2"
   }
 }
