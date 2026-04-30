@@ -21,6 +21,7 @@ const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || 'PLACEHOLDER_CLIENT_ID'
 export async function loginFlow(): Promise<void> {
   const codeVerifier = generateCodeVerifier();
   const codeChallenge = generateCodeChallenge(codeVerifier);
+  const state = base64URLEncode(crypto.randomBytes(16));
 
   return new Promise((resolve, reject) => {
     const server = http.createServer(async (req, res) => {
@@ -41,7 +42,7 @@ export async function loginFlow(): Promise<void> {
             'Content-Type': 'application/json',
             'X-API-Version': '1',
           },
-          body: JSON.stringify({ code, code_verifier: codeVerifier }),
+          body: JSON.stringify({ code, state, code_verifier: codeVerifier }),
         });
 
         const data = await response.json() as any;
@@ -76,8 +77,10 @@ export async function loginFlow(): Promise<void> {
         `?client_id=${GITHUB_CLIENT_ID}` +
         `&redirect_uri=http://localhost:9876/callback` +
         `&scope=read:user user:email` +
+        `&state=cli-${state}` +
         `&code_challenge=${codeChallenge}` +
         `&code_challenge_method=S256`;
+
 
       console.log('\n🔐 Opening GitHub for authentication...');
       console.log(`\nIf your browser doesn't open automatically, visit:\n${authUrl}\n`);
