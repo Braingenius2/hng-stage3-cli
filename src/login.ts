@@ -16,7 +16,7 @@ function generateCodeChallenge(verifier: string): string {
 }
 
 const API_BASE = process.env.INSIGHTA_API_URL || 'https://hng-stage3-backend-production-345d.up.railway.app';
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || 'PLACEHOLDER_CLIENT_ID';
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || 'Ov23lihfaiVSUib1dWhS';
 
 export async function loginFlow(): Promise<void> {
   const codeVerifier = generateCodeVerifier();
