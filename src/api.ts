@@ -1,6 +1,6 @@
 import { loadCredentials, saveCredentials, clearCredentials } from './auth';
 
-const API_BASE = process.env.INSIGHTA_API_URL || 'https://hng-stage3-backend-production.up.railway.app';
+const API_BASE = process.env.INSIGHTA_API_URL || 'https://hng-stage3-backend-production-345d.up.railway.app';
 
 /**
  * Makes an authenticated request to the backend API.
