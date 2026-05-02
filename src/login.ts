@@ -72,14 +72,7 @@ export async function loginFlow(): Promise<void> {
     });
 
     server.listen(9876, () => {
-      const authUrl =
-        `https://github.com/login/oauth/authorize` +
-        `?client_id=${GITHUB_CLIENT_ID}` +
-        `&redirect_uri=http://localhost:9876/callback` +
-        `&scope=read:user user:email` +
-        `&state=cli-${state}` +
-        `&code_challenge=${codeChallenge}` +
-        `&code_challenge_method=S256`;
+      const authUrl = `${API_BASE}/auth/github?state=cli-${state}&code_challenge=${codeChallenge}`;
 
 
       console.log('\n🔐 Opening GitHub for authentication...');
