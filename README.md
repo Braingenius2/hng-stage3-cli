@@ -33,3 +33,12 @@ npm install -g .
 ## Environment Config
 - `INSIGHTA_API_URL`: Override the default API endpoint.
 - `GITHUB_CLIENT_ID`: Override the default OAuth client.
+
+## Troubleshooting (Windows)
+If you get `bash: insighta: command not found` after installing:
+1. Close and reopen your terminal.
+2. If it still fails, use `node dist/index.js` as a prefix:
+   ```bash
+   node dist/index.js login
+   ```
+3. Ensure you have run `npm run build` before installing.
